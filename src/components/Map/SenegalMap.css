@@ -30,35 +30,33 @@
 }
 
 /* Labels (texte sur la carte) */
+/* Dans un SVG, font-size est en unités du viewBox (1000 de large) :
+   le texte grandit et rétrécit avec la carte, pas besoin de media queries */
 .region-label {
-  font-size: clamp(8px, 1.2vw, 14px); /* responsive 🔥 */
+  font-size: 18px;
+  font-weight: 600;
   fill: #1F2A24;
   text-anchor: middle;
+  dominant-baseline: middle;
+
+  /* Halo clair pour rester lisible sur les frontières */
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 3px;
+  paint-order: stroke;
 
   pointer-events: none;
   user-select: none;
-
-  font-weight: 500;
 }
 
-/* Amélioration lisibilité mobile */
+.region-label.selected {
+  fill: #ffffff;
+  stroke: rgba(0, 0, 0, 0.35);
+}
+
+/* Petits écrans : texte un peu plus gros pour compenser la carte réduite */
 @media (max-width: 600px) {
   .region-label {
-    font-size: 9px;
-  }
-}
-
-/* Tablette */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .region-label {
-    font-size: 11px;
-  }
-}
-
-/* Grand écran */
-@media (min-width: 1200px) {
-  .region-label {
-    font-size: 14px;
+    font-size: 24px;
   }
 }
 
